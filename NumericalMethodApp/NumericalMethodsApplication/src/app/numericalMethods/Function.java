@@ -9,12 +9,11 @@ public class Function {
 	
 	public Function(String variableName, String expression){
 	expressionString=expression;
-		
+	setVariableName(variableName);
 	
 	}
 	private Stack<String> tokenize(String expressionString){
 		Stack<String> tokenStack=new Stack<String>();
-		
 		return tokenStack;
 	}
 	
@@ -55,6 +54,7 @@ public class Function {
 		break;
 		case "%":result=first%second;
 		break;
+		case "^":result=Math.pow(first,second);
 		}
 		return result;
 	}
@@ -86,6 +86,7 @@ public class Function {
 	case "/":
 	case "-":
 	case "%":
+	case "^":
 		type=2;//binary operator
 		break;
 	case "sin":
@@ -97,6 +98,7 @@ public class Function {
 	case "tan":
 	case "negative"://special unary operator Negative at start of expression or Parenthesis
 			type=1;//unary operator
+			break;
 	}
 	return type;
 	}
