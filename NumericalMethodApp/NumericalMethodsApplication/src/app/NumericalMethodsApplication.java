@@ -10,6 +10,6 @@ public class NumericalMethodsApplication {
 		Bisect bis = new Bisect();
 		bis.toString();
 		String testExpression="x^3";
-		Function fun=new Function("1Bitch, hi!~123","testString");
+		Function fun=new Function("!+invalid String-Example*/-+","testString");
 	}
 }
