@@ -5,7 +5,7 @@ import java.util.Stack;
 public class Function {
 	private static String forbiddenCharacters=".*[0-9\s*+-/~!|=&%$#]+.*";
 	private String variableName, expressionString;
-	private Stack<String> tokenizedExpression;
+	private Stack<String> polishExpressionStack;
 	
 	public Function(String variableName, String expression){
 	expressionString=expression;
@@ -32,28 +32,16 @@ public class Function {
 	}
 	public String[] getTokenizedExpression() {
 		MathTokenizer mTokenizer=new MathTokenizer(expressionString);
-		return expressionString.split("\\b");
-	}
-	
-	
-	@Deprecated
-	public void testStacked() {
-		String testExpressionString="x x ^";
-		String[] args=testExpressionString.split(" ");
-		Stack<String> testStack=new Stack<String>();
-		for (int i = 0; i < args.length; i++) {
-			testStack.push(args[i]);
-		}
-		String testVariableString="x";
-		setVariableName(testVariableString);
-		tokenizedExpression=testStack;
-		
+		return mTokenizer.tokenizedExpression();
 	}
 	
 	public double evaluate(double value){
 		PolishNotationStack PNS=new PolishNotationStack(variableName);
-		return PNS.evaluate((Stack<String>) tokenizedExpression.clone(), value);
+		return PNS.evaluate((Stack<String>) polishExpressionStack.clone(), value);
 				
+	}
+	private void buildStackExpression() {
+		//TODO: make postfix or prefix based on the tokens given by @class MathTokenizer.java
 	}
 		
 	

@@ -1,5 +1,7 @@
 package app.numericalMethods;
 
+import java.util.ArrayList;
+
 public class MathTokenizer {
 	private String expression;
 	private  int position;
@@ -8,11 +10,17 @@ public class MathTokenizer {
 		this.expression=expression.toLowerCase().replaceAll(" ","");
 		position=0;
 	}
+	public String[] tokenizedExpression() {
+		ArrayList<String> fullList=new ArrayList<String>();
+		while (hasNext())fullList.add(next());
+		
+		return (String[]) fullList.toArray();
+	}
 	public boolean hasNext() {
 		return position<expression.length();
 	}
 	public String next() {
-		System.out.println("Position at Start: "+position);
+		
 		String token="";
 		boolean reachedEndOfToken=false;
 		while (position<expression.length()&&!reachedEndOfToken) {
@@ -75,7 +83,7 @@ public class MathTokenizer {
 			
 			previous=current;
 		}
-		System.out.println("posicion al final: "+position);
+		
 		return token;
 	}
 	public static void tokenize(String expression){
