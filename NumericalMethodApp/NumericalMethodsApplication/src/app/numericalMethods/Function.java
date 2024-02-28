@@ -12,96 +12,7 @@ public class Function {
 	setVariableName(variableName);
 	
 	}
-	private Stack<String> tokenize(String expressionString){
-		Stack<String> tokenStack=new Stack<String>();
-		return tokenStack;
-	}
-	
-	public double evaluate(double value){
-		Stack<String> tokenizedStack=((Stack<String>)tokenizedExpression.clone());
-		Stack<Double> tokenValues=new Stack<Double>();
-		double temporaryResult=0.0;
-		
-		while (!tokenizedStack.empty()) {
-			String bufferString=tokenizedStack.pop();
-			if (tokenType(bufferString)==2) {
-				temporaryResult=operate(bufferString, tokenValues.pop(),tokenValues.pop());
-				tokenValues.push(temporaryResult);
-			}else if (tokenType(bufferString)==1) {
-				temporaryResult=operate(bufferString, tokenValues.pop());
-				tokenValues.push(temporaryResult);
-			}else if (tokenType(bufferString)==0) {
-				if (bufferString.equals(variableName)) {
-				tokenValues.push(value);	
-				}
-				
-			} else {
-				throw new NoSuchMethodError("Something has gone Terribly wrong with unexpected token: "+bufferString);
-			}
-		}
-		return 0.0;
-	}
-	private double operate(String binaryOperator, double first, double second) {
-		double result=0.0;
-		switch(binaryOperator) {
-		case "+":result=first+second;
-		break;
-		case "*":result=first*second;
-		break;
-		case "/":result=first/second;
-		break;
-		case "-":result=first-second;
-		break;
-		case "%":result=first%second;
-		break;
-		case "^":result=Math.pow(first,second);
-		}
-		return result;
-	}
-	private double operate(String operator,double argument ) {
-		double result=0.0;
-		switch (operator) {
-		case "sin":result=Math.sin(argument);
-		break;
-		case "cos":result=Math.cos(argument);
-		break;
-		case "ln":result=Math.log(argument);
-		break;
-		case "sqrt":
-		case "root":result=Math.sqrt(argument);
-		break;
-		case "abs":result=Math.abs(argument);
-		break;
-		case "tan":result=Math.tan(argument);
-		break;
-		case "negative":result=-argument;
-		}
-		return result;
-	}
-	private int tokenType(String operand) {
-	int type=0;
-	switch (operand) {
-	case "+":
-	case "*":
-	case "/":
-	case "-":
-	case "%":
-	case "^":
-		type=2;//binary operator
-		break;
-	case "sin":
-	case "cos":
-	case "ln":
-	case "root":
-	case "abs":
-	case "sqrt":
-	case "tan":
-	case "negative"://special unary operator Negative at start of expression or Parenthesis
-			type=1;//unary operator
-			break;
-	}
-	return type;
-	}
+
 	public String getVariableName() {
 		return variableName;
 	}
@@ -123,5 +34,29 @@ public class Function {
 		return tokenizedExpression;
 	}
 	
+	private Stack<String> tokenize(String expressionString){
+		Stack<String> tokenStack=new Stack<String>();
+		return tokenStack;
+	}
+	@Deprecated
+	public void testStacked() {
+		String testExpressionString="x x ^";
+		String[] args=testExpressionString.split(" ");
+		Stack<String> testStack=new Stack<String>();
+		for (int i = 0; i < args.length; i++) {
+			testStack.push(args[i]);
+		}
+		String testVariableString="x";
+		setVariableName(testVariableString);
+		tokenizedExpression=testStack;
+		
+	}
+	
+	public double evaluate(double value){
+		polishNotationStack PNS=new polishNotationStack(variableName);
+		return PNS.evaluate((Stack<String>) tokenizedExpression.clone(), value);
+				
+	}
+		
 	
 }
