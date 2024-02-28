@@ -12,6 +12,7 @@ public class PolishNotationStack {
 	Stack<String> operatorStack=new Stack<String>();
 	Stack<String> expressionStack =new Stack<String>();
 	for (int i = 0; i < tokens.length; i++) {
+		
 		switch (tokens[i]) {
 		case "(":
 			operatorStack.push(tokens[i]);
@@ -26,21 +27,22 @@ public class PolishNotationStack {
 		case"*":
 		case"/":
 		case"%":
-			while (!(operatorStack.isEmpty()||operatorStack.peek().matches(".*[(+-*/%].*"))) {
+			while (!(operatorStack.isEmpty()||operatorStack.peek().matches(".*[\\*(+-/%].*"))) {
 				expressionStack.push(operatorStack.pop());
 			}
 			operatorStack.push(tokens[i]);
 			break;
 		case "^":
-			while (!(operatorStack.isEmpty()||operatorStack.peek().matches(".*[(+-*/%^].*"))) {
+			while (!(operatorStack.isEmpty()||operatorStack.peek().matches(".*[\\*(+-/%^].*"))) {
 				expressionStack.push(operatorStack.pop());
 			}
 			operatorStack.push(tokens[i]);
 			break;
 		case ")":
-			while (operatorStack.peek()!="(") {
+			while (!operatorStack.peek().contains("(")) {
 				expressionStack.push(operatorStack.pop());
 			}
+			operatorStack.pop();
 			break;
 
 		case "sqrt":
@@ -131,8 +133,6 @@ public class PolishNotationStack {
 				result=Double.parseDouble(token);
 			}
 		}
-		
-		
 		return result;
 	}
 }

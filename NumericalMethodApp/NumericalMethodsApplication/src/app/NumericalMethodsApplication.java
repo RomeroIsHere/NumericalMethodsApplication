@@ -1,19 +1,13 @@
 package app;
 
-import java.util.Arrays;
-
 import app.numericalMethods.*;
-
-//import numericalMethods.Bisect;
 
 public class NumericalMethodsApplication {
 	public static void main(String[] args) {
 		
 		
-		String testExpression="x^x",testVariable="x";
+		String testExpression="cos(2*xanax)*e^cos(2*xanax)",testVariable="xanax";
 		Function fun=new Function(testVariable,testExpression);
-		for (int i = 0; i < 9; i++) {
-			System.out.println(fun.evaluate(i));
-		}
+		System.out.println(fun.evaluate(2,6));
 	}
 }

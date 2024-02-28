@@ -41,7 +41,6 @@ public class MathTokenizer {
 					case '^':case '(':
 					case ')':
 						token="negative";
-						System.out.println("previous one: "+previous);
 						break;
 	
 					default:

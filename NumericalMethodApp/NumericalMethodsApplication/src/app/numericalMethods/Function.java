@@ -1,10 +1,12 @@
 package app.numericalMethods;
 
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Stack;
 
 public class Function {
-	private static String forbiddenCharacters=".*[0-9\s*+-/~!|=&%$#]+.*";
+	private static String forbiddenCharacters=".*[0-9\s\\*+-/~!|=&%$#\\^]+.*";
 	private String variableName, expressionString;
 	private Stack<String> polishExpressionStack;
 	
@@ -13,7 +15,9 @@ public class Function {
 	setVariableName(variableName);
 	
 	}
-
+	public Stack<String> getPolishExpressionStack() {
+		return polishExpressionStack;
+	}
 	public String getVariableName() {
 		return variableName;
 	}
@@ -38,8 +42,11 @@ public class Function {
 	
 	public double evaluate(double value){
 		PolishNotationStack PNS=new PolishNotationStack(variableName);
-		return PNS.evaluate((Stack<String>) polishExpressionStack.clone(), value);
-				
+		return PNS.evaluate((Stack<String>) polishExpressionStack.clone(), value);	
 	}	
-	
+	public double evaluate(double value,int rounding) {
+		BigDecimal bDecimal=new BigDecimal(Double.toString(evaluate(value)));
+		bDecimal=bDecimal.setScale(rounding,RoundingMode.HALF_UP);
+		return bDecimal.doubleValue();
+	}
 }
