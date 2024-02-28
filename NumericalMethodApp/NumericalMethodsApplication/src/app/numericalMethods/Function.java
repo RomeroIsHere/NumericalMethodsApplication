@@ -1,5 +1,6 @@
 package app.numericalMethods;
 
+
 import java.util.Stack;
 
 public class Function {
@@ -8,7 +9,7 @@ public class Function {
 	private Stack<String> polishExpressionStack;
 	
 	public Function(String variableName, String expression){
-	expressionString=expression;
+	setExpressionString(expression);
 	setVariableName(variableName);
 	
 	}
@@ -28,7 +29,7 @@ public class Function {
 	}
 	public void setExpressionString(String expressionString) {
 		this.expressionString = expressionString;
-		MathTokenizer.tokenize(expressionString);
+		polishExpressionStack=PolishNotationStack.buildStack(getTokenizedExpression());
 	}
 	public String[] getTokenizedExpression() {
 		MathTokenizer mTokenizer=new MathTokenizer(expressionString);
@@ -39,10 +40,6 @@ public class Function {
 		PolishNotationStack PNS=new PolishNotationStack(variableName);
 		return PNS.evaluate((Stack<String>) polishExpressionStack.clone(), value);
 				
-	}
-	private void buildStackExpression() {
-		//TODO: make postfix or prefix based on the tokens given by @class MathTokenizer.java
-	}
-		
+	}	
 	
 }

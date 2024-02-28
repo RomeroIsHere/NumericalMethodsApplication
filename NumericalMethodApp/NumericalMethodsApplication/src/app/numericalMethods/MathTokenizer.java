@@ -3,18 +3,24 @@ package app.numericalMethods;
 import java.util.ArrayList;
 
 public class MathTokenizer {
+	
 	private String expression;
 	private  int position;
-	private char previous ='?';
+	private char previous;
+	
 	public MathTokenizer(String expression){
 		this.expression=expression.toLowerCase().replaceAll(" ","");
 		position=0;
+		previous='?';
 	}
 	public String[] tokenizedExpression() {
 		ArrayList<String> fullList=new ArrayList<String>();
 		while (hasNext())fullList.add(next());
-		
-		return (String[]) fullList.toArray();
+		String[] returnalStrings=new String[fullList.size()];
+		for (int i = 0; i < returnalStrings.length; i++) {
+			returnalStrings[i]=fullList.get(i);
+		}
+		return returnalStrings;
 	}
 	public boolean hasNext() {
 		return position<expression.length();
@@ -85,8 +91,5 @@ public class MathTokenizer {
 		}
 		
 		return token;
-	}
-	public static void tokenize(String expression){
-		
 	}
 }

@@ -8,8 +8,61 @@ public class PolishNotationStack {
 	public PolishNotationStack(String varName) {
 		variableName=varName;
 	}
-	
-	
+	public static Stack<String> buildStack(String[] tokens){
+	Stack<String> operatorStack=new Stack<String>();
+	Stack<String> expressionStack =new Stack<String>();
+	for (int i = 0; i < tokens.length; i++) {
+		switch (tokens[i]) {
+		case "(":
+			operatorStack.push(tokens[i]);
+			break;
+		case "+":
+		case "-":
+			while (!(operatorStack.isEmpty()||operatorStack.peek().matches(".*[(+-].*"))) {
+				expressionStack.push(operatorStack.pop());
+			}
+			operatorStack.push(tokens[i]);
+			break;
+		case"*":
+		case"/":
+		case"%":
+			while (!(operatorStack.isEmpty()||operatorStack.peek().matches(".*[(+-*/%].*"))) {
+				expressionStack.push(operatorStack.pop());
+			}
+			operatorStack.push(tokens[i]);
+			break;
+		case "^":
+			while (!(operatorStack.isEmpty()||operatorStack.peek().matches(".*[(+-*/%^].*"))) {
+				expressionStack.push(operatorStack.pop());
+			}
+			operatorStack.push(tokens[i]);
+			break;
+		case ")":
+			while (operatorStack.peek()!="(") {
+				expressionStack.push(operatorStack.pop());
+			}
+			break;
+
+		case "sqrt":
+		case "root":
+		case "sin":
+		case "cos":
+		case "ln":
+		case "abs":
+		case "tan":
+		case "negative":
+			operatorStack.push(tokens[i]);
+		break;
+		default:
+			expressionStack.push(tokens[i]);
+		}
+		
+	}
+	while (!operatorStack.isEmpty()) {
+		expressionStack.push(operatorStack.pop());
+	}
+	return expressionStack;
+	}
 	public double evaluate(Stack<String> expression,String varName,double value) {
 		variableName=varName;
 		return evaluate(expression,value);
@@ -20,19 +73,37 @@ public class PolishNotationStack {
 	}
 	public double evaluate(Stack<String> expressionStack) {
 		String token=expressionStack.pop();
+		double first,second;
 		double result=0.0;
 		switch(token) {
-		case "+":result=evaluate(expressionStack)+evaluate(expressionStack);
+		case "+":first=evaluate(expressionStack);
+		second=evaluate(expressionStack);
+			result=second+first;
 		break;
-		case "*":result=evaluate(expressionStack)*evaluate(expressionStack);
+		case "*":first=evaluate(expressionStack);
+		second=evaluate(expressionStack);
+			result=second*first;
 		break;
-		case "/":result=evaluate(expressionStack)/evaluate(expressionStack);
+		case "/":first=evaluate(expressionStack);
+		second=evaluate(expressionStack);
+		result=second/first;
 		break;
-		case "-":result=evaluate(expressionStack)-evaluate(expressionStack);
+		case "-":
+			
+			first=evaluate(expressionStack);
+			second=evaluate(expressionStack);
+			result=second-first;
 		break;
-		case "%":result=evaluate(expressionStack)%evaluate(expressionStack);
+		case "%":
+			first=evaluate(expressionStack);
+			second=evaluate(expressionStack);
+			result=second%first;
 		break;
-		case "^":result=Math.pow(evaluate(expressionStack),evaluate(expressionStack));
+		
+		case "^":
+			first=evaluate(expressionStack);
+			second=evaluate(expressionStack);
+			result=Math.pow(second,first);
 		break;
 		case "sin":result=Math.sin(evaluate(expressionStack));
 		break;
