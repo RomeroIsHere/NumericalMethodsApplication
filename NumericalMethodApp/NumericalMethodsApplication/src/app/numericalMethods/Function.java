@@ -28,16 +28,14 @@ public class Function {
 	}
 	public void setExpressionString(String expressionString) {
 		this.expressionString = expressionString;
-		tokenizedExpression=tokenize(expressionString);
+		MathTokenizer.tokenize(expressionString);
 	}
-	public Stack<String> getTokenizedExpression() {
-		return tokenizedExpression;
+	public String[] getTokenizedExpression() {
+		MathTokenizer mTokenizer=new MathTokenizer(expressionString);
+		return expressionString.split("\\b");
 	}
 	
-	private Stack<String> tokenize(String expressionString){
-		Stack<String> tokenStack=new Stack<String>();
-		return tokenStack;
-	}
+	
 	@Deprecated
 	public void testStacked() {
 		String testExpressionString="x x ^";
@@ -53,7 +51,7 @@ public class Function {
 	}
 	
 	public double evaluate(double value){
-		polishNotationStack PNS=new polishNotationStack(variableName);
+		PolishNotationStack PNS=new PolishNotationStack(variableName);
 		return PNS.evaluate((Stack<String>) tokenizedExpression.clone(), value);
 				
 	}

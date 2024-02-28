@@ -2,10 +2,10 @@ package app.numericalMethods;
 
 import java.util.Stack;
 
-public class polishNotationStack {
+public class PolishNotationStack {
 	private String variableName;
 	private double varValue;
-	public polishNotationStack(String varName) {
+	public PolishNotationStack(String varName) {
 		variableName=varName;
 	}
 	
