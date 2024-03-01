@@ -19,7 +19,7 @@ public class PolishNotationStack {
 			break;
 		case "+":
 		case "-":
-			while (!(operatorStack.isEmpty()||operatorStack.peek().matches(".*[(+-].*"))) {
+			while (!(operatorStack.isEmpty()||operatorStack.peek().matches(".*[(].*"))) {
 				expressionStack.push(operatorStack.pop());
 			}
 			operatorStack.push(tokens[i]);
@@ -27,7 +27,7 @@ public class PolishNotationStack {
 		case"*":
 		case"/":
 		case"%":
-			while (!(operatorStack.isEmpty()||operatorStack.peek().matches(".*[\\*(+-/%].*"))) {
+			while (!(operatorStack.isEmpty()||operatorStack.peek().matches(".*[(+-].*"))) {
 				expressionStack.push(operatorStack.pop());
 			}
 			operatorStack.push(tokens[i]);

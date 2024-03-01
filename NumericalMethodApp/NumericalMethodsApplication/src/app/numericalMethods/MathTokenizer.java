@@ -39,7 +39,7 @@ public class MathTokenizer {
 					case '+':case '*':
 					case '/':case '%':
 					case '^':case '(':
-					case ')':
+					case ')':case '?':
 						token="negative";
 						break;
 	
