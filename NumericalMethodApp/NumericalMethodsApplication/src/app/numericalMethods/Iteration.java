@@ -19,7 +19,11 @@ public double getError() {
 	return error;
 }
 public void setError(double error) {
-	this.error = Math.abs(error);
+	if(iterationNumber<=1)
+		this.error=-1;
+	else {
+		this.error=Math.abs(error);
+	}
 }
 public int getIterationNumber() {
 	return iterationNumber;

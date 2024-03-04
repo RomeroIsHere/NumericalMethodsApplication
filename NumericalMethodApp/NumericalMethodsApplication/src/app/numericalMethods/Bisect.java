@@ -2,7 +2,7 @@ package app.numericalMethods;
 
 import java.util.ArrayList;
 
-public class Bisect implements IterativeAlgorithm{
+public class Bisect{
 private Function function;
 private double lowerLimit, upperLimit,currentResult, allowedError;
 private int iteration;
@@ -14,7 +14,6 @@ public Bisect(Function function, double lowerLimit, double upperLimit, double al
 	iteration=1;
 }
 
-@Override
 public Iteration nextStep() {
 	BisectIteration bis;
 	double nextApprox=(lowerLimit+upperLimit)/2.0;
@@ -32,14 +31,15 @@ public Iteration nextStep() {
 	return bis;
 }
 
-@Override
-public Iteration[] solve() {
+
+public ArrayList<BisectIteration> solve() {
 	ArrayList<BisectIteration> listOfIterations=new ArrayList<BisectIteration>();
 	BisectIteration current=null;
 	do {
 		current=(BisectIteration)nextStep();
 		listOfIterations.add(current);
 	} while (current.getError()>allowedError);
-	return (BisectIteration[])listOfIterations.toArray();
+	return listOfIterations;
 }
+
 }
