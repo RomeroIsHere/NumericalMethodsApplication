@@ -14,7 +14,7 @@ public Bisect(Function function, double lowerLimit, double upperLimit, double al
 	iteration=1;
 }
 
-public Iteration nextStep() {
+public BisectIteration nextStep() {
 	BisectIteration bis;
 	double nextApprox=(lowerLimit+upperLimit)/2.0;
 	double lowEval=function.evaluate(lowerLimit);
