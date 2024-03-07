@@ -30,5 +30,14 @@ public class Matrix {
 		}
 		
 	}
-	
+	public void sumRows(int firstRow, int secondRow) {
+		if (firstRow>=0&&firstRow<=rows&&secondRow>=0&&secondRow<=rows) {
+			//TODO: add Sumation functionality
+		}
+	}
+	public void substractRows(int firstRow, int secondRow) {
+		if (firstRow>=0&&firstRow<=rows&&secondRow>=0&&secondRow<=rows) {
+			//TODO: add substraction functionality
+		}
+	}
 }
