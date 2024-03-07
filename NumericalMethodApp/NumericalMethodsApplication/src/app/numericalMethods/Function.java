@@ -40,6 +40,7 @@ public class Function {
 		return mTokenizer.tokenizedExpression();
 	}
 	
+	@SuppressWarnings("unchecked")
 	public double evaluate(double value){
 		PolishNotationStack PNS=new PolishNotationStack(variableName);
 		return PNS.evaluate((Stack<String>) polishExpressionStack.clone(), value);	
