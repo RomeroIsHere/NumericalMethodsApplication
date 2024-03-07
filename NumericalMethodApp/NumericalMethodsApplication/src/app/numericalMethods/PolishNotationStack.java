@@ -107,11 +107,9 @@ public class PolishNotationStack {
 			second=evaluate(expressionStack);
 			result=Math.pow(second,first);
 		break;
-		case "sin":result=Math.sin(evaluate(expressionStack));
-		break;
-		case "cos":result=Math.cos(evaluate(expressionStack));
-		break;
 		case "ln":result=Math.log(evaluate(expressionStack));
+		break;
+		case "log10":result=Math.log10(evaluate(expressionStack));
 		break;
 		case "sqrt":
 		case "root":result=Math.sqrt(evaluate(expressionStack));
@@ -119,6 +117,22 @@ public class PolishNotationStack {
 		case "abs":result=Math.abs(evaluate(expressionStack));
 		break;
 		case "tan":result=Math.tan(evaluate(expressionStack));
+		break;
+		case "arctan":result=Math.atan(evaluate(expressionStack));
+		break;
+		case "sin":result=Math.sin(evaluate(expressionStack));
+		break;
+		case "arcsin":result=Math.asin(evaluate(expressionStack));
+		break;
+		case "cos":result=Math.cos(evaluate(expressionStack));
+		break;
+		case "arccos":
+		case "arcos":result=Math.acos(evaluate(expressionStack));
+		break;
+		case "cot":Math.tan(1.0/evaluate(expressionStack));
+		break;
+		case "arccot":
+		case "arcot":
 		break;
 		case "negative":result=-evaluate(expressionStack);
 		break;
