@@ -50,4 +50,14 @@ public class Function {
 		bDecimal=bDecimal.setScale(rounding,RoundingMode.HALF_UP);
 		return bDecimal.doubleValue();
 	}
+	
+	public double[] evaluate(double lower, double upper, int sections){
+		double[] values=new double[sections];
+		double increment=(upper-lower)/sections;
+		double value=lower;
+		for (int i = 0; i < values.length; i++,value+=increment) {
+			values[i]=evaluate(value);
+		}
+		return values;
+	}
 }
