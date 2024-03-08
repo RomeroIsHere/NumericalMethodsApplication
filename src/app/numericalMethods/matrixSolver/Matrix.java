@@ -2,7 +2,7 @@ package app.numericalMethods.matrixSolver;
 
 public class Matrix {
 	private double[][] matrixArray;
-	private int rows, columns;
+	private int rows, columns, iteration;
 	public Matrix(int rows, int columns) {
 		if (rows>0) {
 			this.rows=rows;
@@ -12,8 +12,20 @@ public class Matrix {
 			}
 		}
 	}
+	public void setIteration(int i) {
+		iteration=i>0?i:0;
+	}
+	public int getIterationNumber() {
+		return iteration;
+	}
 	public Matrix(double[][] arr) {
-		this.matrixArray=arr.clone();
+		this.matrixArray=deepCopy(arr);
+	}
+	public double[][] getMatrixArray() {
+		return matrixArray;
+	}
+	public void setMatrixArray(double[][] matrixArray) {
+		this.matrixArray = matrixArray;
 	}
 	public void switchRows(int firstRow, int secondRow) {
 		
@@ -33,17 +45,10 @@ public class Matrix {
 		}
 		
 	}
-	public void sumRows(int sumatorRow, int sumandRow) {
+	public void sumRows(int sumatorRow, int sumandRow,double factor) {
 		if (sumatorRow>=0&&sumatorRow<=rows&&sumandRow>=0&&sumandRow<=rows) {
 			for (int column = 0; column < columns; column++) {
-				matrixArray[sumandRow][column]+=matrixArray[sumatorRow][column];
-			}
-		}
-	}
-	public void substractRows(int sumatorRow, int sumandRow) {
-		if (sumatorRow>=0&&sumatorRow<=rows&&sumandRow>=0&&sumandRow<=rows) {
-			for (int column = 0; column < columns; column++) {
-				matrixArray[sumandRow][column]-=matrixArray[sumatorRow][column];
+				matrixArray[sumandRow][column]+=matrixArray[sumatorRow][column]*factor;
 			}
 		}
 	}
@@ -54,11 +59,24 @@ public class Matrix {
 			}
 		}
 	}
-	public void substractColumns(int sumatorColumn, int sumandColumn) {
-		if (sumatorColumn>=0&&sumatorColumn<=rows&&sumandColumn>=0&&sumandColumn<=rows) {
-			for (int row = 0; row < rows; row++) {
-				matrixArray[row][sumandColumn]-=matrixArray[row][sumatorColumn];
+	public void multiplyRow(int row,double factor) {
+		if (row>=0&&row<rows) {
+			for (int column = 0; column < columns; column++) {
+				matrixArray[row][column]*=factor;
 			}
 		}
+	}
+	public Matrix clone() {
+		return new Matrix(matrixArray);
+	}
+	
+	private double[][] deepCopy(double[][] original){
+		double[][] copy=new double[original.length][original[0].length];
+		for (int i = 0; i < original.length; i++) {
+			for (int j = 0; j < original[i].length; j++) {
+				copy[i][j]=original[i][j];
+			}
+		}
+		return copy;
 	}
 }
