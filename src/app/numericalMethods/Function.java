@@ -6,9 +6,9 @@ import java.math.RoundingMode;
 import java.util.Stack;
 
 public class Function {
-	private static String forbiddenCharacters=".*[0-9\s\\*+-/~!|=&%$#\\^]+.*";
-	private String variableName, expressionString;
-	private Stack<String> polishExpressionStack;
+	protected static String forbiddenCharacters=".*[0-9\s\\*+-/~!|=&%$#\\^]+.*";
+	protected String variableName, expressionString;
+	protected Stack<String> polishExpressionStack;
 	
 	public Function(String variableName, String expression){
 	setExpressionString(expression);
@@ -23,7 +23,7 @@ public class Function {
 	}
 	public void setVariableName(String variableName) {
 		if (variableName.matches(forbiddenCharacters)) {
-			throw new IllegalArgumentException("Forbidden Characters Found in Variable Name");
+			throw new IllegalArgumentException("Forbidden Characters Found in Variable Name:"+variableName);
 		}else {
 			this.variableName=variableName;
 		}

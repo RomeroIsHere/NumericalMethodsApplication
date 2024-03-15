@@ -1,12 +1,20 @@
 package app.numericalMethods;
 
+import java.util.HashMap;
 import java.util.Stack;
 
 public class PolishNotationStack {
-	private String variableName;
-	private double varValue;
+	private HashMap<String, Double> keyValuesHashMap;
 	public PolishNotationStack(String varName) {
-		variableName=varName;
+		keyValuesHashMap=new HashMap<String, Double>();
+		keyValuesHashMap.put(varName, 0.0);
+	}
+	public PolishNotationStack(String... varNames) {
+		keyValuesHashMap=new HashMap<String, Double>();
+		for (String string : varNames) {
+			keyValuesHashMap.put(string, 0.0);
+		}
+		
 	}
 	public static Stack<String> buildStack(String[] tokens){
 	Stack<String> operatorStack=new Stack<String>();
@@ -66,13 +74,30 @@ public class PolishNotationStack {
 	return expressionStack;
 	}
 	public double evaluate(Stack<String> expression,String varName,double value) {
-		variableName=varName;
+		keyValuesHashMap.put(varName, value);
 		return evaluate(expression,value);
 	}
 	public double evaluate(Stack<String> expression,double value) {
-		varValue=value;
+		keyValuesHashMap.replace((String)keyValuesHashMap.keySet().toArray()[0], value);
 		return evaluate(expression);
 	}
+	public double evaluate(Stack<String> expression,String[] varNames,double[] values) {
+		
+		for (int i = 0; i < values.length&&i<varNames.length; i++) {
+			keyValuesHashMap.put(varNames[i], values[i]);
+		}
+		return evaluate(expression);
+	}
+	public double evaluate(Stack<String> expression,double... values) {
+		int i=0;
+		for (String d :keyValuesHashMap.keySet())
+			if (i<values.length) 
+				keyValuesHashMap.replace(d, values[i++]);
+			
+		
+		return evaluate(expression);
+	}
+	
 	public double evaluate(Stack<String> expressionStack) {
 		String token=expressionStack.pop();
 		double first,second;
@@ -141,11 +166,7 @@ public class PolishNotationStack {
 		case "pi":result=Math.PI;
 		break;
 		default:
-			if (token.equals(variableName)) {
-				result=varValue;
-			}else {
-				result=Double.parseDouble(token);
-			}
+			result=keyValuesHashMap.get(token);
 		}
 		return result;
 	}
