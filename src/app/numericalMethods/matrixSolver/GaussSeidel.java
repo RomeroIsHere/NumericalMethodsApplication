@@ -2,7 +2,6 @@ package app.numericalMethods.matrixSolver;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 
 import app.functions.MultivariableFunction;
 
@@ -90,6 +89,9 @@ public class GaussSeidel {
 		}
 		step++;
 		return newValues;
+	}
+	public int stepIndex() {
+		return step;
 	}
 	
 }
