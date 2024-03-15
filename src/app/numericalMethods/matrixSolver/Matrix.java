@@ -79,4 +79,10 @@ public class Matrix {
 		}
 		return copy;
 	}
+	public int getColumns() {
+		return columns;
+	}
+	public int getRows() {
+		return rows;
+	}
 }
