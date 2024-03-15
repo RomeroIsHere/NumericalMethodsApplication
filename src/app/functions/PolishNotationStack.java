@@ -1,4 +1,4 @@
-package app.numericalMethods;
+package app.functions;
 
 import java.util.HashMap;
 import java.util.Stack;
@@ -166,7 +166,18 @@ public class PolishNotationStack {
 		case "pi":result=Math.PI;
 		break;
 		default:
-			result=keyValuesHashMap.get(token);
+			if (keyValuesHashMap.containsKey(token)) {
+				result=keyValuesHashMap.get(token);	
+			}else {
+				try {
+					result=Double.parseDouble(token);
+				} catch (Exception except) {
+					result=0;
+					System.err.println("Unknown token or variable" + token);
+				}
+			}
+			
+
 		}
 		return result;
 	}

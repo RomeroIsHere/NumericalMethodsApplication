@@ -2,6 +2,8 @@ package app.numericalMethods;
 
 import java.util.ArrayList;
 
+import app.functions.Function;
+
 public class Secant{
 	private Function function;
 	private double previous,current,allowedError;

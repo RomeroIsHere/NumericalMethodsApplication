@@ -2,6 +2,8 @@ package app.numericalMethods;
 
 import java.util.ArrayList;
 
+import app.functions.Function;
+
 public class Bisect{
 private Function function;
 private double lowerLimit, upperLimit,currentResult, allowedError;

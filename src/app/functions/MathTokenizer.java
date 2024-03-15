@@ -1,4 +1,4 @@
-package app.numericalMethods;
+package app.functions;
 
 import java.util.ArrayList;
 
@@ -27,8 +27,9 @@ public class MathTokenizer {
 	}
 	public String next() {
 		
-		String token="";
+		String token="",auxiliarString="";
 		boolean reachedEndOfToken=false;
+		
 		while (position<expression.length()&&!reachedEndOfToken) {
 			char current=expression.charAt(position++);
 			switch (current) {

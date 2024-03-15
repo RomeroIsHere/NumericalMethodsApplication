@@ -1,4 +1,4 @@
-package app.numericalMethods;
+package app.functions;
 
 
 import java.math.BigDecimal;

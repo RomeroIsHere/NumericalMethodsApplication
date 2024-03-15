@@ -1,14 +1,19 @@
 package app.numericalMethods.matrixSolver;
 
-import app.numericalMethods.MultivariableFunction;
+import java.util.ArrayList;
+
+import app.functions.MultivariableFunction;
 
 public class GaussSeidel {
 	private Matrix extendedMatrix;
 	private int step;
-	private MultivariableFunction mf;
+	private ArrayList<MultivariableFunction> calculatorArrayList;
 	public GaussSeidel(Matrix eqSystem) {
 		extendedMatrix=eqSystem;
 		step=0;
+	}
+	public void createFunctions() {
+		
 	}
 
 }
