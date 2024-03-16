@@ -82,13 +82,16 @@ public class GaussSeidel {
 		return returnal;
 	}
 	public double[] step() {
-		double[] newValues=new double[variableNameStrings.length];
+		double[] currentValues=new double[variableNameStrings.length];
+		double[] error=new double[variableNameStrings.length];
 		for (int i = 0; i < variableNameStrings.length; i++) {
-			newValues[i]=calculatorArrayList.get(i).evaluate(getValuesByExcluding(i));
-			valoresHashMap.put(variableNameStrings[i], newValues[i]);
+			currentValues[i]=calculatorArrayList.get(i).evaluate(getValuesByExcluding(i));
+			error[i]=Math.abs(((currentValues[i]-valoresHashMap.get(variableNameStrings[i]))/currentValues[i])*100);
+			valoresHashMap.put(variableNameStrings[i], currentValues[i]);
 		}
 		step++;
-		return newValues;
+		SeidelIteration sIteration=new SeidelIteration(step, currentValues,error);
+		return currentValues;
 	}
 	public int stepIndex() {
 		return step;
