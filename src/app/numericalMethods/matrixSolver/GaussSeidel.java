@@ -81,7 +81,7 @@ public class GaussSeidel {
 		}
 		return returnal;
 	}
-	public double[] step() {
+	public SeidelIteration step() {
 		double[] currentValues=new double[variableNameStrings.length];
 		double[] error=new double[variableNameStrings.length];
 		for (int i = 0; i < variableNameStrings.length; i++) {
@@ -90,8 +90,7 @@ public class GaussSeidel {
 			valoresHashMap.put(variableNameStrings[i], currentValues[i]);
 		}
 		step++;
-		SeidelIteration sIteration=new SeidelIteration(step, currentValues,error);
-		return currentValues;
+		return new SeidelIteration(step, currentValues,error);
 	}
 	public int stepIndex() {
 		return step;
