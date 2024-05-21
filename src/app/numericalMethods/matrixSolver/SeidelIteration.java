@@ -33,14 +33,14 @@ public class SeidelIteration {
 	}
 	@Override
 	public String toString() {
-		String returnal=step+"\t";
+		String returnal="Paso:"+step+"\n";
 		double max=0;
 		for (int i = 0; i < error.length; i++) {
-			returnal+=values[i]+"\t";
-			returnal+=error[i]+"\t";
+			returnal+="Valor de"+i+": "+values[i]+"\t";
+			returnal+=error[i]+"\n";
 			max=error[i]>max?error[i]:max;
 		}
-		returnal+=max;
+		returnal+="Error Maximo:"+max;
 		return returnal;
 	}
 	

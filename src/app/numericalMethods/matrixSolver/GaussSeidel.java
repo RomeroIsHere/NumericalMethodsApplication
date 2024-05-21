@@ -16,11 +16,12 @@ public class GaussSeidel {
 		extendedMatrix=eqSystem;
 		step=0;
 		calculatorArrayList=new ArrayList<MultivariableFunction>();
-		variableNameStrings=new String[eqSystem.getColumns()];
+		variableNameStrings=new String[eqSystem.getColumns()-1];
+		valoresHashMap=new HashMap<>();
 		createFunctions();
 	}
 	
-	public void createFunctions() {
+	private void createFunctions() {
 		createVariableNames();
 		calculatorArrayList.clear();
 		
@@ -38,7 +39,7 @@ public class GaussSeidel {
 		String auxString="(";
 		double divisor=matrix[i][i];
 		auxString+=matrix[i][matrix[i].length-1];
-		for (int j = 0; j < variableNameStrings.length-1; j++) {
+		for (int j = 0; j < variableNameStrings.length; j++) {
 			if (j!=i) {
 				auxString+="-"+matrix[i][j]+"*"+variableNameStrings[j];
 			}
@@ -62,8 +63,8 @@ public class GaussSeidel {
 	}
 	private void createVariableNames() {
 		for (int i = 0; i < variableNameStrings.length; i++) {
-			variableNameStrings[i]=('a'+(char)i)+"";
-			
+			variableNameStrings[i]="x"+(char)('a'+i);
+			System.out.println("Nombre de Variable:"+variableNameStrings[i]);
 		}
 	}
 	public void initializeValues(double...ds) {
@@ -86,8 +87,12 @@ public class GaussSeidel {
 	public SeidelIteration step() {
 		double[] currentValues=new double[variableNameStrings.length];
 		double[] error=new double[variableNameStrings.length];
+		
 		for (int i = 0; i < variableNameStrings.length; i++) {
 			currentValues[i]=calculatorArrayList.get(i).evaluate(getValuesByExcluding(i));
+			System.out.println(calculatorArrayList.get(i).getExpressionString());
+			System.out.println(i+"-Variable:"+variableNameStrings[i]);
+			System.out.println(i+"-Valor:"+currentValues[i]);
 			error[i]=Math.abs(((currentValues[i]-valoresHashMap.get(variableNameStrings[i]))/currentValues[i])*100);
 			valoresHashMap.put(variableNameStrings[i], currentValues[i]);
 		}

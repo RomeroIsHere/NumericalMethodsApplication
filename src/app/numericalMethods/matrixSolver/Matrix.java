@@ -12,6 +12,7 @@ public class Matrix {
 			}
 		}
 	}
+	
 	public void setIteration(int i) {
 		iteration=i>0?i:0;
 	}
@@ -20,6 +21,8 @@ public class Matrix {
 	}
 	public Matrix(double[][] arr) {
 		this.matrixArray=deepCopy(arr);
+		this.rows=matrixArray.length;
+		this.columns=matrixArray[0].length;
 	}
 	
 	public double[][] getMatrixArray() {
