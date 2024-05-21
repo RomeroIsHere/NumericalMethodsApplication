@@ -21,7 +21,9 @@ public class Matrix {
 	public Matrix(double[][] arr) {
 		this.matrixArray=deepCopy(arr);
 	}
+	
 	public double[][] getMatrixArray() {
+		
 		return matrixArray;
 	}
 	public void setMatrixArray(double[][] matrixArray) {

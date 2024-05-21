@@ -11,6 +11,7 @@ public class GaussSeidel {
 	private ArrayList<MultivariableFunction> calculatorArrayList;
 	private String[] variableNameStrings;
 	private HashMap<String, Double> valoresHashMap;
+	
 	public GaussSeidel(Matrix eqSystem) {
 		extendedMatrix=eqSystem;
 		step=0;
@@ -18,6 +19,7 @@ public class GaussSeidel {
 		variableNameStrings=new String[eqSystem.getColumns()];
 		createFunctions();
 	}
+	
 	public void createFunctions() {
 		createVariableNames();
 		calculatorArrayList.clear();

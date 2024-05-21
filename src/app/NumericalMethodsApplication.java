@@ -1,21 +1,30 @@
 package app;
 
+
+
+import java.util.Arrays;
+
 import app.functions.Function;
 import app.functions.MultivariableFunction;
+import app.interpolationMethods.DividedDifferences;
 import app.numericalMethods.*;
+import app.numericalMethods.matrixSolver.*;
 
 public class NumericalMethodsApplication {
 	public static void main(String[] args) {
-		
-		
-		String testExpression="x^4-2*x^3-12*x^2+16*x-40",testVariable="x";
+		DividedDifferences dividedDifferences=new DividedDifferences();
+		double[] input = {0,1,2,3,4};
+		double[] output= {30,48,67,91,135};
+		Function fun=dividedDifferences.interpolate(input,output);
+		/*String testExpression="x^4-2*x^3-12*x^2+16*x-40",testVariable="x";
 		Function fun=new Function(testVariable,testExpression);
-		MultivariableFunction Mfun=new MultivariableFunction("0.0+x*y+5", "x","y");
+		*/
+		System.out.println(fun.getExpressionString());
 		for (int i = 0; i < 10; i++) {
-			for (int j = 0; j < 10; j++) {
-				System.out.println(i+", "+j+": "+Mfun.evaluate(i,j+0.0));
-			}
+			System.out.println(i);
+			System.out.println(fun.evaluate(i));
 		}
+		
 		
 	}
 }

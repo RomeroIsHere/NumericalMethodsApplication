@@ -11,6 +11,7 @@ public class SeidelIteration {
 	}
 	}
 	public SeidelIteration(int step,double[] ds,double[] error) {
+		this.step=step;
 		values=ds;
 		this.error=error;
 	}
